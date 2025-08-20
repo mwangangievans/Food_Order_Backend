@@ -1,9 +1,11 @@
 import express, { request, response, NextFunction } from "express";
+import { CreateVador, GetVador, GetVadorById } from "../controllers";
 
 
 const router = express.Router();
-router.get('/', (req: express.Request, res: express.Response, next: NextFunction) => {
-    return res.json("Hello Mwangangi welcome to the admin panel!");
-});
+router.post('/vador', CreateVador)
+router.get('/vador', GetVador)
+router.get('/vador/:id', GetVadorById);
+
 
 export { router as AdminRoute };

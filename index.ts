@@ -1,8 +1,12 @@
 import Express from "express";
 import { VandorRoute } from "./routes/VandorRoute";
 import { AdminRoute } from "./routes/AdminRoute";
+import BodyParser from "body-parser";
 
 const app = Express();
+app.use(BodyParser.json());
+app.use(BodyParser.urlencoded({ extended: true }));
+
 
 app.use('/vandor', VandorRoute);
 app.use('/admin', AdminRoute);
