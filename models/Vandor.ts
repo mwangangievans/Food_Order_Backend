@@ -31,6 +31,15 @@ const vadorSchema = new Schema<vadorDocument>({
     rating: { type: Number, default: 0 },
     // foods: [{ type: Schema.Types.ObjectId, ref: 'Food' }]
 }, {
+    toJSON: {
+        transform(doc, ret: any) {
+            delete ret.password;
+            delete ret.salt;
+            delete ret.__v;
+            delete ret.createdAt;
+            delete ret.updatedAt;
+        }
+    },
     timestamps: true
 });
 
