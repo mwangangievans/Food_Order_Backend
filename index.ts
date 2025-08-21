@@ -2,6 +2,7 @@ import Express from "express";
 import { VandorRoute } from "./routes/VandorRoute";
 import { AdminRoute } from "./routes/AdminRoute";
 import BodyParser from "body-parser";
+import mongoose from "mongoose";
 
 const app = Express();
 app.use(BodyParser.json());
