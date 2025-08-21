@@ -4,6 +4,15 @@ import { Vandor } from "../models";
 import { GeneratePassword, generateSalt } from "../utility";
 
 
+export const findVador = async (id: string | undefined, email?: string,) => {
+    if (email) {
+        return await Vandor.findOne({ email: email });
+    } else {
+        return await Vandor.findById(id);
+    }
+}
+
+
 export const CreateVador = async (req: Request, res: Response, next: NextFunction) => {
 
     const { name, email, password, address, foodtype, phone, ownerName, pincode } = <CreateVadorInput>req.body;
@@ -36,11 +45,28 @@ export const CreateVador = async (req: Request, res: Response, next: NextFunctio
     // Here you would typically save the vendor to the database
 
 }
-export const GetVador = async (req: Request, res: Response, next: NextFunction) => {
+export const GetVadors = async (req: Request, res: Response, next: NextFunction) => {
 
+    const vandors = await Vandor.find()
+    if (!vandors || vandors.length === 0) {
+        return res.status(404).json({ message: "No vandors found" });
+    }
+    return res.json(vandors);
 }
 
 export const GetVadorById = async (req: Request, res: Response, next: NextFunction) => {
+    const vandorId = req.params.id;
+
+
+    const vador = await findVador(vandorId);
+    debugger
+    if (vador) {
+        return res.json(vador);
+    }
+    const id = vandorId;
+    if (!id) {
+        return res.status(400).json({ message: "Invalid Vandor ID" });
+    }
 
 }
 
